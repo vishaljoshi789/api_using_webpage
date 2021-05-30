@@ -9,20 +9,33 @@ let newsContent = document.getElementById("newsContent");
 
 //                 </div>
 //             </div>`
+// const data = null;
 
-// variables
-let api_key = '6525ec894ed8465ca3fbd521ec7a7108'
+// const xhr = new XMLHttpRequest();
+// xhr.withCredentials = true;
 
-// creating a new xhr Object
-news = new XMLHttpRequest()
+// xhr.addEventListener("readystatechange", function() {
+//     if (this.readyState === this.DONE) {
+//         console.log(this.responseText);
+//     }
+// });
 
-// creating get request
-news.open("GET", `https://newsapi.org/v2/top-headlines?country=in&apiKey=6525ec894ed8465ca3fbd521ec7a7108`, true);
-// news.getResponseHeader('Content-type', 'application/json')
+// xhr.open("GET", "https://free-news.p.rapidapi.com/v1/search?q=Elon%20Musk&lang=en");
+// xhr.setRequestHeader("x-rapidapi-key", "5ff957dda0msh24870c38c07cecap142ec3jsnfeb44bc4b0e4");
+// xhr.setRequestHeader("x-rapidapi-host", "free-news.p.rapidapi.com");
 
-// function to be done after loding
-news.onload = () => {
-    console.log(JSON.parse(this.responseText))
+// xhr.send(data);
 
-}
-news.send();
+fetch("https://free-news.p.rapidapi.com/v1/search?q=corona&lang=en", {
+        "method": "GET",
+        "headers": {
+            "x-rapidapi-key": "5ff957dda0msh24870c38c07cecap142ec3jsnfeb44bc4b0e4",
+            "x-rapidapi-host": "free-news.p.rapidapi.com"
+        }
+    })
+    .then(response => {
+        console.log(response);
+    })
+    .catch(err => {
+        console.error(err);
+    });
