@@ -9,7 +9,13 @@ let numcontent = document.getElementById("numcontent");
 
 //                 </div>
 //             </div>`
-fetcthingramdomfacts = () => {
+
+fetchingfact = (number) => {
+    fetch(`http://numbersapi.com/${number}`).then(response => response.text()).then(data => facts(data, number))
+
+
+}
+generatingrandomfacts = () => {
     fact = ""
     for (i = 0; i < 30; i++) {
         num = []
@@ -18,31 +24,43 @@ fetcthingramdomfacts = () => {
         if (number in num) {
             continue
         } else {
-            fetch(`http://numbersapi.com/${number}`).then(response => response.text()).then(data => facts(data, number))
+            fetchingfact(number)
         }
     }
+}
 
-    function facts(data, number) {
-        fact = document.createElement("div")
-        fact.setAttribute("class", "card m-5")
-        fact.setAttribute("style", "width: 18rem")
-        factcontent = document.createElement("div")
-        factheading = document.createElement("h5")
-        factheading.setAttribute("class", "card-title")
-        factheading.appendChild(document.createTextNode(`Number ${number}`))
-        factcontent.appendChild(factheading)
-        factinfo = document.createElement("p")
-        factinfo.setAttribute("class", "card-text")
-        factinfo.appendChild(document.createTextNode(`${data}`))
-        factcontent.appendChild(factinfo)
-        fact.appendChild(factcontent)
-        numcontent.appendChild(fact)
+function facts(data, number) {
+    fact = document.createElement("div")
+    fact.setAttribute("class", "card m-5")
+    fact.setAttribute("style", "width: 18rem")
+    factcontent = document.createElement("div")
+    factheading = document.createElement("h5")
+    factheading.setAttribute("class", "card-title")
+    factheading.appendChild(document.createTextNode(`Number ${number}`))
+    factcontent.appendChild(factheading)
+    hr = document.createElement("hr")
+    factcontent.appendChild(hr)
+    factinfo = document.createElement("p")
+    factinfo.setAttribute("class", "card-text")
+    factinfo.appendChild(document.createTextNode(`${data}`))
+    factcontent.appendChild(factinfo)
+    fact.appendChild(factcontent)
+    numcontent.appendChild(fact)
 
 
-
-
-    }
 
 
 }
-fetcthingramdomfacts()
+
+searchbtnclicked = () => {
+
+    let searchinput = document.getElementById("searchinput")
+    numcontent.innerHTML = ""
+    if (searchinput.value != "") {
+        fetchingfact(searchinput.value)
+    } else {
+        generatingrandomfacts()
+    }
+
+}
+generatingrandomfacts()
