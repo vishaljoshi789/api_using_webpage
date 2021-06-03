@@ -1,4 +1,55 @@
 // api_key = 5dOtVzFfpMmcQJwEA7dgDPzkaTGt0Lqe9Rf9JdGe
 // https://api.nasa.gov/planetary/apod?api_key=5dOtVzFfpMmcQJwEA7dgDPzkaTGt0Lqe9Rf9JdGe
+
+
+/* <div class="accordion" id="accordionExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingOne">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        Accordion Item #1
+      </button>
+    </h2>
+    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+      </div>
+    </div>
+  </div> </div>*/
+
+
+
 maincontent = document.getElementById("maincontent");
-fetch("https://api.nasa.gov/planetary/apod?api_key=5dOtVzFfpMmcQJwEA7dgDPzkaTGt0Lqe9Rf9JdGe").then(response => response.json()).then(data => console.log(data.explanation))
+displaydata = (data) => {
+    if (data.media_type === "image") {
+        maincontent.innerHTML = `<div class="accordion" id="accordionExample">
+        <div class="accordion-item">
+           
+            <img src="${data.url}" alt="" style="max-width:100%; max-height:100%;">
+            
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            <div>
+            <h2 class="accordion-header" id="headingOne">${data.title}</h2></div>
+            </button>
+            
+          <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              ${data.explanation}
+              <hr>
+              Date : ${data.date}
+            </div>
+          </div>
+        </div> </div>`
+    }
+}
+
+fetchingdata = (data) => {
+    if (data === 'apod') {
+        fetch("https://api.nasa.gov/planetary/apod?api_key=5dOtVzFfpMmcQJwEA7dgDPzkaTGt0Lqe9Rf9JdGe").then(response => response.json()).then(fetchedata => displaydata(fetchedata))
+    }
+}
+
+(datatofetch = () => {
+    if (document.getElementById("heading").innerText = 'Astronomy Picture of the Day') {
+        fetchingdata('apod')
+    }
+})()

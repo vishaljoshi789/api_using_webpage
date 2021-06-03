@@ -1,19 +1,6 @@
-// seleting the container to place our news
 let numcontent = document.getElementById("numcontent");
-// numcontent.innerHTML = `<div class="card m-5" style="width: 18rem;">
-//                 <img src="..." class="card-img-top" alt="...">
-//                 <div class="card-body">
-//                     <h5 class="card-title">Card title</h5>
-//                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-//                     <a href="#" class="btn btn-primary">Go somewhere</a>
-
-//                 </div>
-//             </div>`
-
 fetchingfact = (number) => {
     fetch(`http://numbersapi.com/${number}`).then(response => response.text()).then(data => facts(data, number))
-
-
 }
 generatingrandomfacts = () => {
     fact = ""
@@ -46,14 +33,10 @@ function facts(data, number) {
     factcontent.appendChild(factinfo)
     fact.appendChild(factcontent)
     numcontent.appendChild(fact)
-
-
-
-
 }
 
 searchbtnclicked = () => {
-
+    document.querySelector(".footer").setAttribute("style", "position:fixed;")
     let searchinput = document.getElementById("searchinput")
     numcontent.innerHTML = ""
     if (searchinput.value != "") {
@@ -61,6 +44,5 @@ searchbtnclicked = () => {
     } else {
         generatingrandomfacts()
     }
-
 }
 generatingrandomfacts()
