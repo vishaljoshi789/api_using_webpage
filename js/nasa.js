@@ -22,7 +22,7 @@ maincontent = document.getElementById("maincontent");
 displaydata = (data) => {
     if (data.media_type === "image") {
         maincontent.innerHTML = `<div class="accordion" id="accordionExample">
-        <div class="accordion-item">
+        <div class="accordion-item p-5">
            
             <img src="${data.url}" alt="" style="max-width:100%; max-height:100%;">
             
